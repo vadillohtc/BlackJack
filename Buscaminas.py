@@ -3,7 +3,8 @@ from random import randint
 
 #Comienzo del juego
 print("Bienvenido a BlackJack Maniacs")
-cartas = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "J":10, "Q":10, "K":10, "A":1}
+cartas={"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "J":10, "Q":10, "K":10, "A":11}
+
 #print(cartas.keys())
 #print(cartas.values())
 
@@ -49,6 +50,8 @@ carta_2_jugador = nueva_carta()
 print(carta_2_jugador)
 valor_carta_2_jugador = cartas.get(carta_2_jugador)
 total_jugador += valor_carta_2_jugador
+if total_jugador > 21 and carta_1_jugador or carta_2_jugador == "A":
+    total_jugador -= 10
 print("El total de tu jugada es " + str(total_jugador))
 
 print("La carta del casino es:")
@@ -59,4 +62,19 @@ total_casino += valor_carta_1_casino
 carta_2_casino = nueva_carta()
 valor_carta_2_casino = cartas.get(carta_2_casino)
 total_casino += valor_carta_2_casino
+while total_casino <= total_jugador:
+    total_casino += cartas.get(nueva_carta())
+
 print("El total de la jugada del casino es  " + str(total_casino))
+
+
+if total_casino > 21:
+    print("La banca se ha pasado. Enhorabuena has ganado!!")
+elif total_jugador > total_casino:
+    print("Enhorabuena has ganado!!")
+elif total_jugador < total_casino:
+    print("Lo sentimos, prueba de nuevo")
+elif total_jugador == 21:
+    print("BLACKJACK!!!")
+else:
+    print("Parece que tenemos un empate!")

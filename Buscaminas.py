@@ -8,10 +8,6 @@ cartas = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "J":10, "Q":10
 #print(cartas.values())
 
 
-total_jugador = 0
-total_casino = 0
-
-print("Tu primera carta es:")
 def nueva_carta():
     value = randint(1, 12)
     if value == 1:
@@ -40,4 +36,27 @@ def nueva_carta():
         carta = "A"
     return carta
 
-print(nueva_carta())
+total_jugador = 0
+total_casino = 0
+
+print("Tu primera carta es:")
+carta_1_jugador = nueva_carta()
+print(carta_1_jugador)
+valor_carta_1_jugador = cartas.get(carta_1_jugador)
+total_jugador += valor_carta_1_jugador
+print("Tu segunda carta es:")
+carta_2_jugador = nueva_carta()
+print(carta_2_jugador)
+valor_carta_2_jugador = cartas.get(carta_2_jugador)
+total_jugador += valor_carta_2_jugador
+print("El total de tu jugada es " + str(total_jugador))
+
+print("La carta del casino es:")
+carta_1_casino = nueva_carta()
+print(carta_1_casino)
+valor_carta_1_casino = cartas.get(carta_1_casino)
+total_casino += valor_carta_1_casino
+carta_2_casino = nueva_carta()
+valor_carta_2_casino = cartas.get(carta_2_casino)
+total_casino += valor_carta_2_casino
+print("El total de la jugada del casino es  " + str(total_casino))

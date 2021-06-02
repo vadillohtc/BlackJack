@@ -1,5 +1,7 @@
 # generate random integer values
 from random import randint
+from sys import stdin
+from types import SimpleNamespace
 
 #Comienzo del juego
 print("Bienvenido a BlackJack Maniacs")
@@ -50,8 +52,6 @@ carta_2_jugador = nueva_carta()
 print(carta_2_jugador)
 valor_carta_2_jugador = cartas.get(carta_2_jugador)
 total_jugador += valor_carta_2_jugador
-if total_jugador > 21 and carta_1_jugador or carta_2_jugador == "A":
-    total_jugador -= 10
 print("El total de tu jugada es " + str(total_jugador))
 
 print("La carta del casino es:")
@@ -62,19 +62,66 @@ total_casino += valor_carta_1_casino
 carta_2_casino = nueva_carta()
 valor_carta_2_casino = cartas.get(carta_2_casino)
 total_casino += valor_carta_2_casino
-while total_casino <= total_jugador:
-    total_casino += cartas.get(nueva_carta())
-
-print("El total de la jugada del casino es  " + str(total_casino))
-
-
-if total_casino > 21:
-    print("La banca se ha pasado. Enhorabuena has ganado!!")
-elif total_jugador > total_casino:
-    print("Enhorabuena has ganado!!")
-elif total_jugador < total_casino:
-    print("Lo sentimos, prueba de nuevo")
-elif total_jugador == 21:
-    print("BLACKJACK!!!")
+if total_jugador == 21:
+    print("BLACKJACK!!")
 else:
-    print("Parece que tenemos un empate!")
+    print("¿Quieres una tercera carta? Si/No")
+    respuesta_1 = input()
+
+    if respuesta_1 == "No" or respuesta_1 == "no":
+        while total_casino < total_jugador:
+            total_casino += cartas.get(nueva_carta())
+        print("El total de la jugada del casino es  " + str(total_casino))
+        if total_casino > 21:
+            print("La banca se ha pasado. Enhorabuena has ganado!!")
+        elif total_jugador > total_casino:
+            print("Enhorabuena has ganado!!")
+        elif total_jugador < total_casino:
+            print("Lo sentimos, prueba de nuevo")
+        else:
+            print("Parece que tenemos un empate!")
+
+    if respuesta_1 == "Si" or respuesta_1 == "si":
+        carta_3_jugador = nueva_carta()
+        print("Tu tercera carta es " + str(carta_3_jugador))
+        valor_carta_3_jugador = cartas.get(carta_3_jugador)
+        total_jugador += valor_carta_3_jugador
+        print("El total de tu jugada es " + str(total_jugador))
+        if total_jugador > 21:
+            print("Te has pasado! Intentalo de nuevo.")
+        else:
+            print("¿Quieres una cuerta carta? Si/No")
+            respuesta_2 = input()
+            if respuesta_2 == "No" or respuesta_2 == "no":
+                while total_casino < total_jugador:
+                    total_casino += cartas.get(nueva_carta())
+                print("El total de la jugada del casino es  " + str(total_casino))
+                if total_casino > 21:
+                    print("La banca se ha pasado. Enhorabuena has ganado!!")
+                elif total_jugador > total_casino:
+                    print("Enhorabuena has ganado!!")
+                elif total_jugador < total_casino:
+                    print("Lo sentimos, prueba de nuevo")
+                else:
+                    print("Parece que tenemos un empate!")
+
+            if respuesta_2 == "Si" or respuesta_2 == "si":
+                carta_4_jugador = nueva_carta()
+                print("Tu cuarta carta es " + str(carta_4_jugador))
+                valor_carta_4_jugador = cartas.get(carta_4_jugador)
+                total_jugador += valor_carta_4_jugador
+                print("El total de tu jugada es " + str(total_jugador))
+                if total_jugador > 21:
+                    print("Te has pasado! Intentalo de nuevo.")
+                else:
+                    print("El total de la jugada del casino es  " + str(total_casino))
+                    if total_casino > 21:
+                        print("La banca se ha pasado. Enhorabuena has ganado!!")
+                    elif total_jugador > total_casino:
+                        print("Enhorabuena has ganado!!")
+                    elif total_jugador < total_casino:
+                        print("Lo sentimos, prueba de nuevo")
+                    else:
+                        print("Parece que tenemos un empate!")
+
+
